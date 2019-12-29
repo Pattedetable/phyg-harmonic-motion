@@ -1,5 +1,7 @@
 # Mouvement harmonique
 
+![screenshot](https://raw.githubusercontent.com/Pattedetable/mouvement-harmonique/master/SHM_screenshot.png)
+
 ## Français
 
 Ce programme a pour but de visualiser l'effet de divers paramètres sur un mouvement d'oscillation harmonique.  Dans le système d'éducation québécois, cette notion se place au niveau collégial.
