@@ -33,7 +33,7 @@ class Ui_MainWindow(object):
         self.figure = plt.figure()
 
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(800, 455)
+        MainWindow.resize(1200, 600)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
@@ -41,7 +41,7 @@ class Ui_MainWindow(object):
 
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget) # Quitter
         self.pushButton_2.setObjectName("pushButton_2")
-        self.gridLayout.addWidget(self.pushButton_2, 12, 0, 1, 3)
+        self.gridLayout.addWidget(self.pushButton_2, 14, 0, 1, 3)
 
 #        self.pushButton = QtWidgets.QPushButton(self.centralwidget) # Exporter vidéo
 #        self.pushButton.setObjectName("pushButton")
@@ -49,11 +49,11 @@ class Ui_MainWindow(object):
 
         self.pushButton_3 = QtWidgets.QPushButton(self.centralwidget) # Redémarrer
         self.pushButton_3.setObjectName("pushButton_3")
-        self.gridLayout.addWidget(self.pushButton_3, 11, 0, 1, 3)
+        self.gridLayout.addWidget(self.pushButton_3, 13, 0, 1, 3)
 
 
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout.addItem(spacerItem, 10, 0, 1, 1)
+        self.gridLayout.addItem(spacerItem, 12, 0, 1, 1)
 
         self.radioButton = QtWidgets.QRadioButton(self.centralwidget) # Sinus
         self.radioButton.setObjectName("radioButton")
@@ -66,7 +66,7 @@ class Ui_MainWindow(object):
 
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setObjectName("label")
-        self.gridLayout.addWidget(self.label, 2, 0, 1, 1)
+        self.gridLayout.addWidget(self.label, 4, 0, 1, 1)
 
         self.horizontalSlider = QtWidgets.QSlider(self.centralwidget) # Amplitude
         self.horizontalSlider.setMinimum(1)
@@ -74,11 +74,11 @@ class Ui_MainWindow(object):
         self.horizontalSlider.setPageStep(2)
         self.horizontalSlider.setOrientation(QtCore.Qt.Horizontal)
         self.horizontalSlider.setObjectName("horizontalSlider")
-        self.gridLayout.addWidget(self.horizontalSlider, 3, 0, 1, 3)
+        self.gridLayout.addWidget(self.horizontalSlider, 5, 0, 1, 3)
 
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setObjectName("label_2")
-        self.gridLayout.addWidget(self.label_2, 4, 0, 1, 1)
+        self.gridLayout.addWidget(self.label_2, 6, 0, 1, 1)
 
         self.horizontalSlider2 = QtWidgets.QSlider(self.centralwidget) # Fréquence
         self.horizontalSlider2.setMinimum(1)
@@ -86,11 +86,11 @@ class Ui_MainWindow(object):
         self.horizontalSlider2.setPageStep(4)
         self.horizontalSlider2.setOrientation(QtCore.Qt.Horizontal)
         self.horizontalSlider2.setObjectName("horizontalSlider2")
-        self.gridLayout.addWidget(self.horizontalSlider2, 5, 0, 1, 3)
+        self.gridLayout.addWidget(self.horizontalSlider2, 7, 0, 1, 3)
 
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setObjectName("label_3")
-        self.gridLayout.addWidget(self.label_3, 6, 0, 1, 1)
+        self.gridLayout.addWidget(self.label_3, 8, 0, 1, 1)
 
         self.horizontalSlider3 = QtWidgets.QSlider(self.centralwidget) # Constante de phase
         self.horizontalSlider3.setMinimum(-8)
@@ -98,11 +98,11 @@ class Ui_MainWindow(object):
         self.horizontalSlider3.setPageStep(4)
         self.horizontalSlider3.setOrientation(QtCore.Qt.Horizontal)
         self.horizontalSlider3.setObjectName("horizontalSlider3")
-        self.gridLayout.addWidget(self.horizontalSlider3, 7, 0, 1, 3)
+        self.gridLayout.addWidget(self.horizontalSlider3, 9, 0, 1, 3)
 
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
         self.label_4.setObjectName("label_4")
-        self.gridLayout.addWidget(self.label_4, 8, 0, 1, 1)
+        self.gridLayout.addWidget(self.label_4, 10, 0, 1, 1)
 
         self.horizontalSlider4 = QtWidgets.QSlider(self.centralwidget) # Amortissement
         self.horizontalSlider4.setMinimum(0)
@@ -110,8 +110,19 @@ class Ui_MainWindow(object):
         self.horizontalSlider4.setPageStep(2)
         self.horizontalSlider4.setOrientation(QtCore.Qt.Horizontal)
         self.horizontalSlider4.setObjectName("horizontalSlider4")
-        self.gridLayout.addWidget(self.horizontalSlider4, 9, 0, 1, 3)
+        self.gridLayout.addWidget(self.horizontalSlider4, 11, 0, 1, 3)
 
+        self.label_5 = QtWidgets.QLabel(self.centralwidget)
+        self.label_5.setObjectName("label_5")
+        self.gridLayout.addWidget(self.label_5, 2, 0, 1, 1)
+
+
+        self.comboBox = QtWidgets.QComboBox(self.centralwidget) # Type de graphique
+        self.comboBox.setObjectName("comboBox")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.gridLayout.addWidget(self.comboBox, 3, 0, 1, 3)
 
         self.canvas = FigureCanvas(self.figure) # Graphique
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
@@ -144,6 +155,8 @@ class Ui_MainWindow(object):
         self.horizontalSlider3.setValue(0)
         self.horizontalSlider4.setValue(0)
         self.radioButton.toggle()
+        self.comboBox.setCurrentIndex(0)
+
 
 
         # Operating system detection
@@ -172,6 +185,8 @@ class Ui_MainWindow(object):
         self.radioButton2.toggled.connect(lambda: self.animationTempsReel())
         self.pushButton_3.clicked.connect(lambda: self.stopAnim())
         self.pushButton_3.clicked.connect(lambda: self.animationTempsReel())
+        self.comboBox.currentIndexChanged['QString'].connect(lambda: self.stopAnim())
+        self.comboBox.currentIndexChanged['QString'].connect(lambda: self.animationTempsReel())
 
 
 #        self.pushButton.clicked.connect(lambda: self.stopAnim())
@@ -187,12 +202,17 @@ class Ui_MainWindow(object):
         self.pushButton_2.setText(self._translate("MainWindow", "Quitter"))
         self.pushButton_3.setText(self._translate("MainWindow", "Redémarrer"))
 #        self.pushButton.setText(self._translate("MainWindow", "Exporter en vidéo (.mp4)"))
-        self.label.setText(self._translate("MainWindow", "Amplitude (m)"))
-        self.label_2.setText(self._translate("MainWindow", "Fréquence (Hz)"))
-        self.label_3.setText(self._translate("MainWindow", "Constante de phase (rad)"))
-        self.label_4.setText(self._translate("MainWindow", "Amortissement (Hz)"))
+        self.label.setText(self._translate("MainWindow", "Amplitude") + " (m)")
+        self.label_2.setText(self._translate("MainWindow", "Fréquence") + " (Hz)")
+        self.label_3.setText(self._translate("MainWindow", "Constante de phase") + " (rad)")
+        self.label_4.setText(self._translate("MainWindow", "Amortissement") + " (Hz)")
+        self.label_5.setText(self._translate("MainWindow", "Type de graphique"))
         self.radioButton.setText(self._translate("MainWindow", "Sinus"))
         self.radioButton2.setText(self._translate("MainWindow", "Cosinus"))
+        self.comboBox.setItemText(0, self._translate("MainWindow", "Position"))
+        self.comboBox.setItemText(1, self._translate("MainWindow", "Vitesse"))
+        self.comboBox.setItemText(2, self._translate("MainWindow", "Accélération"))
+
 
 
         self.menu_aide.setTitle(self._translate("MainWindow", "Aide"))
@@ -209,8 +229,13 @@ class Ui_MainWindow(object):
         self.menu_aide.setDisabled(boolean)
         self.label.setDisabled(boolean)
         self.label_2.setDisabled(boolean)
+        self.label_3.setDisabled(boolean)
+        self.label_4.setDisabled(boolean)
+        self.label_5.setDisabled(boolean)
         self.radioButton.setDisabled(boolean)
         self.radioButton2.setDisabled(boolean)
+        self.comboBox.setDisabled(boolean)
+
 
     def fermerEtAfficher(self, MainWindow, window_autre):
 #        if window_autre:
@@ -249,6 +274,11 @@ class Ui_MainWindow(object):
         omega = self.horizontalSlider2.value()*np.pi/4
         constante = self.horizontalSlider3.value()*np.pi/4
         amortissement = self.horizontalSlider4.value()
+        vitesse = False
+
+        y_label = [r"$-A$", r"$0$", r"$A$"]
+        v_label = [r"$-A\omega$", r"$0$", r"$A\omega$"]
+        a_label = [r"$-A\omega^2$", r"$0$", r"$A\omega^2$"]
 
         nb_particules_hor = 1
         longueur = 20
@@ -261,20 +291,23 @@ class Ui_MainWindow(object):
 
         self.ax1 = self.figure.add_subplot(121)
         self.ax2 = self.figure.add_subplot(122)
+
 #        self.ax2 = self.figure.add_subplot(122, sharey=self.ax1)
 
         self.ax1.axis([-1, 1, -5, 5])
 
-        self.ax2.axis([0, 2*np.pi, -5, 5])
 
-        self.ax2.set_xlabel(self._translate("MainWindow", "Temps (s)"))
-        self.ax1.set_ylabel(self._translate("MainWindow", "Position (m)"))
+        self.ax2.set_xlabel(self._translate("MainWindow", "Temps") + " (s)")
+        self.ax1.set_ylabel(self._translate("MainWindow", "Position") + " (m)")
+
 
 #        self.ax1.set_yticks([])
-        self.ax1.set_yticks([0])
+        self.ax1.set_yticks([-amplitude, 0, amplitude])
+        self.ax1.set_yticklabels(y_label)
 
 #        self.ax2.set_yticklabels([r"$0$"])
 
+        self.ax1.grid(True)
         self.ax2.grid(True)
 
         self.ax1.set_xticks([])
@@ -289,19 +322,46 @@ class Ui_MainWindow(object):
 #            amplitude = 0.5*np.sin(k*(x_eq - node))
             balls.append(particle.Particule(x_eq, amplitude))
 
-        y_label = [r"$-A$", r"$0$", r"$A$"]
-        v_label = [r"$-A\omega$", r"$0$", r"$A\omega$"]
-        a_label = [r"$-A\omega^2$", r"$0$", r"$A\omega^2$"]
 
-        self.ax2.set_yticks([-amplitude, 0, amplitude])
-        self.ax2.set_yticklabels(y_label)
+
+        self.ax2.yaxis.set_label_position("right")
+        self.ax2.yaxis.set_ticks_position("right")
+
+        if self.comboBox.currentIndex() == 0:
+            self.ax2.set_ylabel(self._translate("MainWindow", "Position") + " (m)")
+            self.ax2.axis([0, 2*np.pi, -5, 5])
+            self.ax2.set_yticks([-amplitude, 0, amplitude])
+            self.ax2.set_yticklabels(y_label)
+            couleur = "r"
+        elif self.comboBox.currentIndex() == 1:
+            self.ax2.set_ylabel(self._translate("MainWindow", "Vitesse") + " (m/s)")
+            self.ax2.axis([0, 2*np.pi, -5*2*np.pi, 5*2*np.pi])
+            self.ax2.set_yticks([-amplitude*omega, 0, amplitude*omega])
+            self.ax2.set_yticklabels(v_label)
+            amplitude = amplitude*omega
+            constante = constante + np.pi/2
+            couleur = "b"
+        elif self.comboBox.currentIndex() == 2:
+            self.ax2.set_ylabel(self._translate("MainWindow", "Accélération") + " (m/s²)")
+            self.ax2.axis([0, 2*np.pi, -5*4*np.pi**2, 5*4*np.pi**2])
+            self.ax2.set_yticks([-amplitude*omega**2, 0, amplitude*omega**2])
+            self.ax2.set_yticklabels(a_label)
+            amplitude = amplitude*omega**2
+            constante = constante + np.pi
+            couleur = "g"
+
+
+
 
         if self.radioButton2.isChecked() == False:
             deplacement_pos = amplitude*np.sin(omega*grillex + constante)
         else:
             deplacement_pos = amplitude*np.cos(omega*grillex + constante)
 
-        graph2, = self.ax2.plot(grillex, deplacement_pos, color='k')
+        graph2, = self.ax2.plot(grillex, deplacement_pos, color=couleur)
+
+        amplitude = self.horizontalSlider.value()
+        constante = self.horizontalSlider3.value()*np.pi/4
 
         return num_frames, omega, amplitude, constante, amortissement, balls, grilley
 

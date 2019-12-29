@@ -12,28 +12,40 @@
         <translation>Quit</translation>
     </message>
     <message>
-        <source>Amplitude (m)</source>
-        <translation>Amplitude (m)</translation>
+        <source>Type de graphique</source>
+        <translation>Graph type</translation>
     </message>
     <message>
-        <source>Fréquence (Hz)</source>
-        <translation>Frequency (Hz)</translation>
+        <source>Amplitude</source>
+        <translation>Amplitude</translation>
     </message>
     <message>
-        <source>Constante de phase (rad)</source>
-        <translation>Phase constant (rad)</translation>
+        <source>Fréquence</source>
+        <translation>Frequency</translation>
     </message>
     <message>
-        <source>Amortissement (Hz)</source>
-        <translation>Damping (Hz)</translation>
+        <source>Constante de phase</source>
+        <translation>Phase constant</translation>
     </message>
     <message>
-        <source>Position (m)</source>
-        <translation>Position (m)</translation>
+        <source>Amortissement</source>
+        <translation>Damping</translation>
     </message>
     <message>
-        <source>Temps (s)</source>
-        <translation>Time (s)</translation>
+        <source>Position</source>
+        <translation>Position</translation>
+    </message>
+    <message>
+        <source>Vitesse</source>
+        <translation>Velocity</translation>
+    </message>
+    <message>
+        <source>Accélération</source>
+        <translation>Acceleration</translation>
+    </message>
+    <message>
+        <source>Temps</source>
+        <translation>Time</translation>
     </message>
     <message>
         <source>Sinus</source>
