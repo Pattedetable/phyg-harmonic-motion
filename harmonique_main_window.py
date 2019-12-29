@@ -80,7 +80,7 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.label_3, 4, 0, 1, 1)
 
         self.horizontalSlider3 = QtWidgets.QSlider(self.centralwidget) # Constante de phase
-        self.horizontalSlider3.setMinimum(0)
+        self.horizontalSlider3.setMinimum(-8)
         self.horizontalSlider3.setMaximum(8)
         self.horizontalSlider3.setPageStep(4)
         self.horizontalSlider3.setOrientation(QtCore.Qt.Horizontal)
@@ -107,7 +107,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.canvas.sizePolicy().hasHeightForWidth())
         self.canvas.setSizePolicy(sizePolicy)
         self.canvas.setObjectName("canvas")
-        self.gridLayout.addWidget(self.canvas, 0, 3, 9, 1)
+        self.gridLayout.addWidget(self.canvas, 0, 3, 10, 1)
 
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -218,70 +218,83 @@ class Ui_MainWindow(object):
 
         # Important parameters
         amplitude = self.horizontalSlider.value()
-        omega = self.horizontalSlider.value()*np.pi/8
-        constante = self.horizontalSlider.value()*np.pi/8
-        amortissement = self.horizontalSlider.value()
+        omega = self.horizontalSlider2.value()*np.pi/4
+        constante = self.horizontalSlider3.value()*np.pi/4
+        amortissement = self.horizontalSlider4.value()
 
-        nb_particules_hor = 2
+        nb_particules_hor = 1
         longueur = 20
         num_frames = 45
-        period = 30
+#        period = 30
 #        omega = 2*np.pi/period
         grilley = [0]
 
-        grillex = np.linspace(0, longueur, 100)
+        grillex = np.linspace(0, 2*np.pi, 100)
 
-        self.ax1 = self.figure.add_subplot(211)
-        self.ax2 = self.figure.add_subplot(212, sharex=self.ax1)
+        self.ax1 = self.figure.add_subplot(121)
+        self.ax2 = self.figure.add_subplot(122)
+#        self.ax2 = self.figure.add_subplot(122, sharey=self.ax1)
 
-        self.ax1.axis([-1, longueur + 1, -1, 1])
+        self.ax1.axis([-1, 1, -5, 5])
 
-        self.ax2.axis([-1, longueur + 1, -1, 1])
+        self.ax2.axis([0, 2*np.pi, -5, 5])
 
-        self.ax1.set_xlabel(self._translate("MainWindow", "Temps (s)"))
-        self.ax2.set_ylabel(self._translate("MainWindow", "Position (m)"))
+        self.ax2.set_xlabel(self._translate("MainWindow", "Temps (s)"))
+        self.ax1.set_ylabel(self._translate("MainWindow", "Position (m)"))
 
 #        self.ax1.yaxis.set_label_coords(-0.06, 0.5)
         self.ax1.xaxis.set_label_coords(0.5, -1.1)
         self.ax2.yaxis.set_label_coords(-0.1, 0.5)
 
         self.ax1.set_yticks([])
-#        self.ax2.set_yticks([0])
+        self.ax1.set_yticks([0])
 
 #        self.ax2.set_yticklabels([r"$0$"])
 
         self.ax2.grid(True)
 
-#        self.ax1.set_xticks([])
+        self.ax1.set_xticks([])
 
         # Creation of the particle
         intervalle = longueur/(nb_particules_hor)
 #        k = 2*np.pi/periode
         balls = []
-        for i in range(0, nb_particules_hor-1):
-            x_eq = i*intervalle
+        for i in range(0, nb_particules_hor):
+            x_eq = 0
+#            x_eq = i*intervalle
 #            amplitude = 0.5*np.sin(k*(x_eq - node))
             balls.append(particle.Particule(x_eq, amplitude))
 
-        return num_frames, period, omega, balls, grilley, grillex
+        y_label = [r"$-A$", r"$0$", r"$A$"]
+        v_label = [r"$-A\omega$", r"$0$", r"$A\omega$"]
+        a_label = [r"$-A\omega^2$", r"$0$", r"$A\omega^2$"]
+
+        self.ax2.set_yticks([-amplitude, 0, amplitude])
+        self.ax2.set_yticklabels(y_label)
+
+        deplacement_pos = amplitude*np.sin(omega*grillex + constante)
+        graph2, = self.ax2.plot(grillex, deplacement_pos, color='k')
+
+        return num_frames, omega, amplitude, constante, amortissement, balls, grilley
 
 
     def animationTempsReel(self):
         """ Display the animation in real time """
 
-        [num_frames, period, omega, balls, grilley, grillex] = self.initAnimation()
+        [num_frames, omega, amplitude, constante, amortissement, balls, grilley] = self.initAnimation()
 
         # Displacement and pressure functions
+        period = 2*np.pi/omega
 
-        deplacement_pos = np.sin(omega*grillex)
+        num_frames = int(num_frames*period)
 
         # Plot maximum and minimum curves
 #        self.ax2.plot(grillex, deplacement_pos, 'b--')
 #        self.ax2.plot(grillex, -deplacement_pos, 'b--')
 
-        graph2, = self.ax2.plot(grillex, 0*deplacement_pos, color='k')
 
-        tempss = np.linspace(0, period-period/num_frames, num_frames)
+#        tempss = np.linspace(0, period-period/num_frames, num_frames)
+        tempss = np.linspace(0, period, num_frames)
         self.frames_particles = []
 
         def update(i):
@@ -289,13 +302,14 @@ class Ui_MainWindow(object):
                 frame.remove()
             self.frames_particles = []
             temps = tempss[i]
-            x = np.sin(omega*temps)
+            x = np.sin(omega*temps + constante)
 #            deplacement = np.sin(omega*temps)*deplacement_pos
 #            graph2.set_ydata(deplacement)
             for ball in balls:
                 position = ball.update_position(x)
                 for y in grilley:
-                    self.frames_particles.append(self.ax1.scatter(position, y, s=150, color='k'))
+                    self.frames_particles.append(self.ax1.scatter(y, position, s=150, color='k'))
 
-        self.oscillation = anim.FuncAnimation(self.figure, update, frames=num_frames, repeat=True, interval=40)
+        self.oscillation = anim.FuncAnimation(self.figure, update, frames=num_frames, repeat=True, interval=period/num_frames)
+#        self.oscillation = anim.FuncAnimation(self.figure, update, frames=num_frames, repeat=True, interval=40)
         self.canvas.draw()
