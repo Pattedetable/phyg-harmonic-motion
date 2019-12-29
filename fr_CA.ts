@@ -36,6 +36,18 @@
         <translation>Temps (s)</translation>
     </message>
     <message>
+        <source>Sinus</source>
+        <translation>Sinus</translation>
+    </message>
+    <message>
+        <source>Cosinus</source>
+        <translation>Cosinus</translation>
+    </message>
+    <message>
+        <source>Redémarrer</source>
+        <translation>Redémarrer</translation>
+    </message>
+    <message>
         <source>Aide</source>
         <translation>Help</translation>
     </message>

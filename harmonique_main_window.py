@@ -41,19 +41,32 @@ class Ui_MainWindow(object):
 
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget) # Quitter
         self.pushButton_2.setObjectName("pushButton_2")
-        self.gridLayout.addWidget(self.pushButton_2, 10, 0, 1, 3)
+        self.gridLayout.addWidget(self.pushButton_2, 12, 0, 1, 3)
 
-        self.pushButton = QtWidgets.QPushButton(self.centralwidget) # Exporter vidéo
-        self.pushButton.setObjectName("pushButton")
-        self.gridLayout.addWidget(self.pushButton, 9, 0, 1, 3)
+#        self.pushButton = QtWidgets.QPushButton(self.centralwidget) # Exporter vidéo
+#        self.pushButton.setObjectName("pushButton")
+#        self.gridLayout.addWidget(self.pushButton, 11, 0, 1, 3)
+
+        self.pushButton_3 = QtWidgets.QPushButton(self.centralwidget) # Redémarrer
+        self.pushButton_3.setObjectName("pushButton_3")
+        self.gridLayout.addWidget(self.pushButton_3, 11, 0, 1, 3)
+
 
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout.addItem(spacerItem, 8, 0, 1, 1)
+        self.gridLayout.addItem(spacerItem, 10, 0, 1, 1)
+
+        self.radioButton = QtWidgets.QRadioButton(self.centralwidget) # Sinus
+        self.radioButton.setObjectName("radioButton")
+        self.gridLayout.addWidget(self.radioButton, 0, 0, 1, 3)
+
+        self.radioButton2 = QtWidgets.QRadioButton(self.centralwidget) # Cosinus
+        self.radioButton2.setObjectName("radioButton2")
+        self.gridLayout.addWidget(self.radioButton2, 1, 0, 1, 3)
 
 
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setObjectName("label")
-        self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
+        self.gridLayout.addWidget(self.label, 2, 0, 1, 1)
 
         self.horizontalSlider = QtWidgets.QSlider(self.centralwidget) # Amplitude
         self.horizontalSlider.setMinimum(1)
@@ -61,11 +74,11 @@ class Ui_MainWindow(object):
         self.horizontalSlider.setPageStep(2)
         self.horizontalSlider.setOrientation(QtCore.Qt.Horizontal)
         self.horizontalSlider.setObjectName("horizontalSlider")
-        self.gridLayout.addWidget(self.horizontalSlider, 1, 0, 1, 3)
+        self.gridLayout.addWidget(self.horizontalSlider, 3, 0, 1, 3)
 
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setObjectName("label_2")
-        self.gridLayout.addWidget(self.label_2, 2, 0, 1, 1)
+        self.gridLayout.addWidget(self.label_2, 4, 0, 1, 1)
 
         self.horizontalSlider2 = QtWidgets.QSlider(self.centralwidget) # Fréquence
         self.horizontalSlider2.setMinimum(1)
@@ -73,11 +86,11 @@ class Ui_MainWindow(object):
         self.horizontalSlider2.setPageStep(4)
         self.horizontalSlider2.setOrientation(QtCore.Qt.Horizontal)
         self.horizontalSlider2.setObjectName("horizontalSlider2")
-        self.gridLayout.addWidget(self.horizontalSlider2, 3, 0, 1, 3)
+        self.gridLayout.addWidget(self.horizontalSlider2, 5, 0, 1, 3)
 
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setObjectName("label_3")
-        self.gridLayout.addWidget(self.label_3, 4, 0, 1, 1)
+        self.gridLayout.addWidget(self.label_3, 6, 0, 1, 1)
 
         self.horizontalSlider3 = QtWidgets.QSlider(self.centralwidget) # Constante de phase
         self.horizontalSlider3.setMinimum(-8)
@@ -85,11 +98,11 @@ class Ui_MainWindow(object):
         self.horizontalSlider3.setPageStep(4)
         self.horizontalSlider3.setOrientation(QtCore.Qt.Horizontal)
         self.horizontalSlider3.setObjectName("horizontalSlider3")
-        self.gridLayout.addWidget(self.horizontalSlider3, 5, 0, 1, 3)
+        self.gridLayout.addWidget(self.horizontalSlider3, 7, 0, 1, 3)
 
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
         self.label_4.setObjectName("label_4")
-        self.gridLayout.addWidget(self.label_4, 6, 0, 1, 1)
+        self.gridLayout.addWidget(self.label_4, 8, 0, 1, 1)
 
         self.horizontalSlider4 = QtWidgets.QSlider(self.centralwidget) # Amortissement
         self.horizontalSlider4.setMinimum(0)
@@ -97,7 +110,7 @@ class Ui_MainWindow(object):
         self.horizontalSlider4.setPageStep(2)
         self.horizontalSlider4.setOrientation(QtCore.Qt.Horizontal)
         self.horizontalSlider4.setObjectName("horizontalSlider4")
-        self.gridLayout.addWidget(self.horizontalSlider4, 7, 0, 1, 3)
+        self.gridLayout.addWidget(self.horizontalSlider4, 9, 0, 1, 3)
 
 
         self.canvas = FigureCanvas(self.figure) # Graphique
@@ -107,7 +120,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.canvas.sizePolicy().hasHeightForWidth())
         self.canvas.setSizePolicy(sizePolicy)
         self.canvas.setObjectName("canvas")
-        self.gridLayout.addWidget(self.canvas, 0, 3, 10, 1)
+        self.gridLayout.addWidget(self.canvas, 0, 3, 13, 1)
 
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -130,12 +143,13 @@ class Ui_MainWindow(object):
         self.horizontalSlider2.setValue(4)
         self.horizontalSlider3.setValue(0)
         self.horizontalSlider4.setValue(0)
+        self.radioButton.toggle()
 
 
         # Operating system detection
         self.systeme_exploitation = platform.system()
-        if self.systeme_exploitation == "Darwin":
-            self.pushButton.setDisabled(True)
+#        if self.systeme_exploitation == "Darwin":
+#            self.pushButton.setDisabled(True)
 
         self.retranslateUi(MainWindow)
 
@@ -152,9 +166,16 @@ class Ui_MainWindow(object):
         self.horizontalSlider3.valueChanged['int'].connect(lambda: self.animationTempsReel())
         self.horizontalSlider4.valueChanged['int'].connect(lambda: self.stopAnim())
         self.horizontalSlider4.valueChanged['int'].connect(lambda: self.animationTempsReel())
+        self.radioButton.toggled.connect(lambda: self.stopAnim())
+        self.radioButton.toggled.connect(lambda: self.animationTempsReel())
+        self.radioButton2.toggled.connect(lambda: self.stopAnim())
+        self.radioButton2.toggled.connect(lambda: self.animationTempsReel())
+        self.pushButton_3.clicked.connect(lambda: self.stopAnim())
+        self.pushButton_3.clicked.connect(lambda: self.animationTempsReel())
 
-        self.pushButton.clicked.connect(lambda: self.stopAnim())
-        self.pushButton.clicked.connect(lambda: self.exporterAnimation())
+
+#        self.pushButton.clicked.connect(lambda: self.stopAnim())
+#        self.pushButton.clicked.connect(lambda: self.exporterAnimation())
         self.pushButton_2.clicked.connect(lambda: plt.close())
         self.pushButton_2.clicked.connect(lambda: self.fermerEtAfficher(MainWindow, parent))
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -164,11 +185,15 @@ class Ui_MainWindow(object):
         self._translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(self._translate("MainWindow", "Mouvement harmonique"))
         self.pushButton_2.setText(self._translate("MainWindow", "Quitter"))
-        self.pushButton.setText(self._translate("MainWindow", "Exporter en vidéo (.mp4)"))
+        self.pushButton_3.setText(self._translate("MainWindow", "Redémarrer"))
+#        self.pushButton.setText(self._translate("MainWindow", "Exporter en vidéo (.mp4)"))
         self.label.setText(self._translate("MainWindow", "Amplitude (m)"))
         self.label_2.setText(self._translate("MainWindow", "Fréquence (Hz)"))
         self.label_3.setText(self._translate("MainWindow", "Constante de phase (rad)"))
         self.label_4.setText(self._translate("MainWindow", "Amortissement (Hz)"))
+        self.radioButton.setText(self._translate("MainWindow", "Sinus"))
+        self.radioButton2.setText(self._translate("MainWindow", "Cosinus"))
+
 
         self.menu_aide.setTitle(self._translate("MainWindow", "Aide"))
         self.action_propos.setText(self._translate("MainWindow", "À propos"))
@@ -178,11 +203,14 @@ class Ui_MainWindow(object):
         self.horizontalSlider2.setDisabled(boolean)
         self.horizontalSlider3.setDisabled(boolean)
         self.horizontalSlider4.setDisabled(boolean)
-        self.pushButton.setDisabled(boolean)
+#        self.pushButton.setDisabled(boolean)
         self.pushButton_2.setDisabled(boolean)
+        self.pushButton_3.setDisabled(boolean)
         self.menu_aide.setDisabled(boolean)
         self.label.setDisabled(boolean)
         self.label_2.setDisabled(boolean)
+        self.radioButton.setDisabled(boolean)
+        self.radioButton2.setDisabled(boolean)
 
     def fermerEtAfficher(self, MainWindow, window_autre):
 #        if window_autre:
@@ -242,11 +270,7 @@ class Ui_MainWindow(object):
         self.ax2.set_xlabel(self._translate("MainWindow", "Temps (s)"))
         self.ax1.set_ylabel(self._translate("MainWindow", "Position (m)"))
 
-#        self.ax1.yaxis.set_label_coords(-0.06, 0.5)
-        self.ax1.xaxis.set_label_coords(0.5, -1.1)
-        self.ax2.yaxis.set_label_coords(-0.1, 0.5)
-
-        self.ax1.set_yticks([])
+#        self.ax1.set_yticks([])
         self.ax1.set_yticks([0])
 
 #        self.ax2.set_yticklabels([r"$0$"])
@@ -272,7 +296,11 @@ class Ui_MainWindow(object):
         self.ax2.set_yticks([-amplitude, 0, amplitude])
         self.ax2.set_yticklabels(y_label)
 
-        deplacement_pos = amplitude*np.sin(omega*grillex + constante)
+        if self.radioButton2.isChecked() == False:
+            deplacement_pos = amplitude*np.sin(omega*grillex + constante)
+        else:
+            deplacement_pos = amplitude*np.cos(omega*grillex + constante)
+
         graph2, = self.ax2.plot(grillex, deplacement_pos, color='k')
 
         return num_frames, omega, amplitude, constante, amortissement, balls, grilley
@@ -302,7 +330,10 @@ class Ui_MainWindow(object):
                 frame.remove()
             self.frames_particles = []
             temps = tempss[i]
-            x = np.sin(omega*temps + constante)
+            if self.radioButton.isChecked() == True:
+                x = np.sin(omega*temps + constante)
+            else:
+                x = np.cos(omega*temps + constante)
 #            deplacement = np.sin(omega*temps)*deplacement_pos
 #            graph2.set_ydata(deplacement)
             for ball in balls:

@@ -36,6 +36,18 @@
         <translation>Time (s)</translation>
     </message>
     <message>
+        <source>Sinus</source>
+        <translation>Sine</translation>
+    </message>
+    <message>
+        <source>Cosinus</source>
+        <translation>Cosine</translation>
+    </message>
+    <message>
+        <source>Redémarrer</source>
+        <translation>Restart</translation>
+    </message>
+    <message>
         <source>Aide</source>
         <translation>Help</translation>
     </message>
