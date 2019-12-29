@@ -194,7 +194,6 @@ class Ui_MainWindow(object):
         self.pushButton_2.clicked.connect(lambda: plt.close())
         self.pushButton_2.clicked.connect(lambda: self.fermerEtAfficher(MainWindow, parent))
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-#        MainWindow.setTabOrder(self.horizontalSlider, self.pushButton_2)
 
     def retranslateUi(self, MainWindow):
         self._translate = QtCore.QCoreApplication.translate
@@ -283,8 +282,6 @@ class Ui_MainWindow(object):
         nb_particules_hor = 1
         longueur = 20
         num_frames = 45
-#        period = 30
-#        omega = 2*np.pi/period
         grilley = [0]
 
         grillex = np.linspace(0, 2*np.pi, 100)
@@ -292,7 +289,6 @@ class Ui_MainWindow(object):
         self.ax1 = self.figure.add_subplot(121)
         self.ax2 = self.figure.add_subplot(122)
 
-#        self.ax2 = self.figure.add_subplot(122, sharey=self.ax1)
 
         self.ax1.axis([-1, 1, -5, 5])
 
@@ -314,12 +310,9 @@ class Ui_MainWindow(object):
 
         # Creation of the particle
         intervalle = longueur/(nb_particules_hor)
-#        k = 2*np.pi/periode
         balls = []
         for i in range(0, nb_particules_hor):
             x_eq = 0
-#            x_eq = i*intervalle
-#            amplitude = 0.5*np.sin(k*(x_eq - node))
             balls.append(particle.Particule(x_eq, amplitude))
 
 
@@ -371,17 +364,9 @@ class Ui_MainWindow(object):
 
         [num_frames, omega, amplitude, constante, amortissement, balls, grilley] = self.initAnimation()
 
-        # Displacement and pressure functions
         period = 2*np.pi/omega
-
         num_frames = int(num_frames*period)
 
-        # Plot maximum and minimum curves
-#        self.ax2.plot(grillex, deplacement_pos, 'b--')
-#        self.ax2.plot(grillex, -deplacement_pos, 'b--')
-
-
-#        tempss = np.linspace(0, period-period/num_frames, num_frames)
         tempss = np.linspace(0, period, num_frames)
         self.frames_particles = []
 
@@ -394,13 +379,10 @@ class Ui_MainWindow(object):
                 x = np.sin(omega*temps + constante)
             else:
                 x = np.cos(omega*temps + constante)
-#            deplacement = np.sin(omega*temps)*deplacement_pos
-#            graph2.set_ydata(deplacement)
             for ball in balls:
                 position = ball.update_position(x)
                 for y in grilley:
                     self.frames_particles.append(self.ax1.scatter(y, position, s=150, color='k'))
 
         self.oscillation = anim.FuncAnimation(self.figure, update, frames=num_frames, repeat=True, interval=period/num_frames)
-#        self.oscillation = anim.FuncAnimation(self.figure, update, frames=num_frames, repeat=True, interval=40)
         self.canvas.draw()
