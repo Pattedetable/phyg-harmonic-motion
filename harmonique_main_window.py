@@ -156,6 +156,8 @@ class Ui_MainWindow(object):
         self.horizontalSlider4.setValue(0)
         self.radioButton.toggle()
         self.comboBox.setCurrentIndex(0)
+        self.horizontalSlider4.setDisabled(True)
+        self.label_4.setDisabled(True)
 
 
 
@@ -221,7 +223,7 @@ class Ui_MainWindow(object):
         self.horizontalSlider.setDisabled(boolean)
         self.horizontalSlider2.setDisabled(boolean)
         self.horizontalSlider3.setDisabled(boolean)
-        self.horizontalSlider4.setDisabled(boolean)
+#        self.horizontalSlider4.setDisabled(boolean)
 #        self.pushButton.setDisabled(boolean)
         self.pushButton_2.setDisabled(boolean)
         self.pushButton_3.setDisabled(boolean)
