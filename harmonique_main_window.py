@@ -106,7 +106,7 @@ class Ui_MainWindow(object):
 
         self.horizontalSlider4 = QtWidgets.QSlider(self.centralwidget) # Damping
         self.horizontalSlider4.setMinimum(0)
-        self.horizontalSlider4.setMaximum(5)
+        self.horizontalSlider4.setMaximum(10)
         self.horizontalSlider4.setPageStep(2)
         self.horizontalSlider4.setOrientation(QtCore.Qt.Horizontal)
         self.horizontalSlider4.setObjectName("horizontalSlider4")
@@ -206,7 +206,7 @@ class Ui_MainWindow(object):
         self.label.setText(self._translate("MainWindow", "Amplitude") + " (m)")
         self.label_2.setText(self._translate("MainWindow", "Fréquence") + " (Hz)")
         self.label_3.setText(self._translate("MainWindow", "Constante de phase") + " (rad)")
-        self.label_4.setText(self._translate("MainWindow", "Amortissement") + " (Hz)")
+        self.label_4.setText(self._translate("MainWindow", "Amortissement"))
         self.label_5.setText(self._translate("MainWindow", "Type de graphique"))
         self.radioButton.setText(self._translate("MainWindow", "Sinus"))
         self.radioButton2.setText(self._translate("MainWindow", "Cosinus"))
@@ -274,7 +274,7 @@ class Ui_MainWindow(object):
         amplitude = self.horizontalSlider.value()
         omega = self.horizontalSlider2.value()*np.pi/4
         constante = self.horizontalSlider3.value()*np.pi/4
-        amortissement = self.horizontalSlider4.value()
+        amortissement = self.horizontalSlider4.value()/10
 
         y_label = [r"$-A$", r"$0$", r"$A$"]
         v_label = [r"$-A\omega$", r"$0$", r"$A\omega$"]
