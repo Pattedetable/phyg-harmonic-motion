@@ -20,8 +20,8 @@
         <translation>Amplitude</translation>
     </message>
     <message>
-        <source>Fréquence</source>
-        <translation>Fréquence</translation>
+        <source>Fréquence angulaire</source>
+        <translation>Fréquence angulaire</translation>
     </message>
     <message>
         <source>Constante de phase</source>
