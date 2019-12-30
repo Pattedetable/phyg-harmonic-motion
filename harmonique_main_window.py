@@ -274,9 +274,9 @@ class Ui_MainWindow(object):
         amplitude = self.horizontalSlider.value()
         omega = self.horizontalSlider2.value()*np.pi/4
         constante = self.horizontalSlider3.value()*np.pi/4
-        amortissement = self.horizontalSlider4.value()/10
+        amortissement = self.horizontalSlider4.value()/20
 
-        omega_prime = np.sqrt(omega**2 - amortissement**2)
+        omega_prime = omega*np.sqrt(1 - amortissement**2)
 
         y_label = [r"$-A$", r"$0$", r"$A$"]
         v_label = [r"$-A\omega$", r"$0$", r"$A\omega$"]
@@ -322,22 +322,32 @@ class Ui_MainWindow(object):
             self.ax2.axis([0, 2*np.pi, -5*2*np.pi, 5*2*np.pi])
             self.ax2.set_yticks([-amplitude*omega, 0, amplitude*omega])
             self.ax2.set_yticklabels(v_label)
-            amplitude = amplitude*omega
-            constante = constante + np.pi/2
+#            amplitude = amplitude*omega
+#            constante = constante + np.pi/2
             couleur = "b"
         elif self.comboBox.currentIndex() == 2:
             self.ax2.set_ylabel(self._translate("MainWindow", "Accélération") + " (m/s²)")
             self.ax2.axis([0, 2*np.pi, -5*4*np.pi**2, 5*4*np.pi**2])
             self.ax2.set_yticks([-amplitude*omega**2, 0, amplitude*omega**2])
             self.ax2.set_yticklabels(a_label)
-            amplitude = amplitude*omega**2
-            constante = constante + np.pi
+#            amplitude = amplitude*omega**2
+#            constante = constante + np.pi
             couleur = "g"
 
         if self.radioButton2.isChecked() == False:
-            deplacement_pos = amplitude*np.exp(-amortissement*grillex)*np.sin(omega_prime*grillex + constante)
+            if self.comboBox.currentIndex() == 0:
+                deplacement_pos = amplitude*np.exp(-omega*amortissement*grillex)*np.sin(omega_prime*grillex + constante)
+            elif self.comboBox.currentIndex() == 1:
+                deplacement_pos = amplitude*np.exp(-omega*amortissement*grillex)*(-omega*amortissement*np.sin(omega_prime*grillex + constante) + omega_prime*np.sin(omega_prime*grillex + constante + np.pi/2))
+            elif self.comboBox.currentIndex() == 2:
+                deplacement_pos = amplitude*np.exp(-omega*amortissement*grillex)*(omega**2*amortissement**2*np.sin(omega_prime*grillex + constante) - 2*omega*amortissement*omega_prime*np.sin(omega_prime*grillex + constante + np.pi/2) + omega_prime**2*np.sin(omega_prime*grillex + constante + np.pi))
         else:
-            deplacement_pos = amplitude*np.exp(-amortissement*grillex)*np.cos(omega_prime*grillex + constante)
+            if self.comboBox.currentIndex() == 0:
+                deplacement_pos = amplitude*np.exp(-omega*amortissement*grillex)*np.cos(omega_prime*grillex + constante)
+            elif self.comboBox.currentIndex() == 1:
+                deplacement_pos = amplitude*np.exp(-omega*amortissement*grillex)*(-omega*amortissement*np.cos(omega_prime*grillex + constante) + omega_prime*np.cos(omega_prime*grillex + constante + np.pi/2))
+            elif self.comboBox.currentIndex() == 2:
+                deplacement_pos = amplitude*np.exp(-omega*amortissement*grillex)*(omega**2*amortissement**2*np.cos(omega_prime*grillex + constante) - 2*omega*amortissement*omega_prime*np.cos(omega_prime*grillex + constante + np.pi/2) + omega_prime**2*np.cos(omega_prime*grillex + constante + np.pi))
 
         graph2, = self.ax2.plot(grillex, deplacement_pos, color=couleur)
 
@@ -355,7 +365,7 @@ class Ui_MainWindow(object):
 
         period = 2*np.pi/omega
         num_frames = int(num_frames*period)
-        omega_prime = np.sqrt(omega**2 - amortissement**2)
+        omega_prime = omega*np.sqrt(1 - amortissement**2)
 
 
         if amortissement != 0:
@@ -370,9 +380,9 @@ class Ui_MainWindow(object):
             self.frames_particles = []
             temps = tempss[i]
             if self.radioButton.isChecked() == True:
-                x = np.exp(-amortissement*temps)*np.sin(omega_prime*temps + constante)
+                x = np.exp(-omega*amortissement*temps)*np.sin(omega_prime*temps + constante)
             else:
-                x = np.exp(-amortissement*temps)*np.cos(omega_prime*temps + constante)
+                x = np.exp(-omega*amortissement*temps)*np.cos(omega_prime*temps + constante)
             for ball in balls:
                 position = ball.update_position(x)
                 for y in grilley:
