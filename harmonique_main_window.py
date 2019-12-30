@@ -156,8 +156,8 @@ class Ui_MainWindow(object):
         self.horizontalSlider4.setValue(0)
         self.radioButton.toggle()
         self.comboBox.setCurrentIndex(0)
-        self.horizontalSlider4.setDisabled(True)
-        self.label_4.setDisabled(True)
+#        self.horizontalSlider4.setDisabled(True)
+#        self.label_4.setDisabled(True)
 
 
 
@@ -206,7 +206,7 @@ class Ui_MainWindow(object):
         self.label.setText(self._translate("MainWindow", "Amplitude") + " (m)")
         self.label_2.setText(self._translate("MainWindow", "Fréquence") + " (Hz)")
         self.label_3.setText(self._translate("MainWindow", "Constante de phase") + " (rad)")
-        self.label_4.setText(self._translate("MainWindow", "Amortissement"))
+        self.label_4.setText(self._translate("MainWindow", "Amortissement") + " (" + self._translate("MainWindow", "sous-amorti") + ")")
         self.label_5.setText(self._translate("MainWindow", "Type de graphique"))
         self.radioButton.setText(self._translate("MainWindow", "Sinus"))
         self.radioButton2.setText(self._translate("MainWindow", "Cosinus"))
@@ -223,7 +223,7 @@ class Ui_MainWindow(object):
         self.horizontalSlider.setDisabled(boolean)
         self.horizontalSlider2.setDisabled(boolean)
         self.horizontalSlider3.setDisabled(boolean)
-#        self.horizontalSlider4.setDisabled(boolean)
+        self.horizontalSlider4.setDisabled(boolean)
 #        self.pushButton.setDisabled(boolean)
         self.pushButton_2.setDisabled(boolean)
         self.pushButton_3.setDisabled(boolean)
@@ -276,6 +276,8 @@ class Ui_MainWindow(object):
         constante = self.horizontalSlider3.value()*np.pi/4
         amortissement = self.horizontalSlider4.value()/10
 
+        omega_prime = np.sqrt(omega**2 - amortissement**2)
+
         y_label = [r"$-A$", r"$0$", r"$A$"]
         v_label = [r"$-A\omega$", r"$0$", r"$A\omega$"]
         a_label = [r"$-A\omega^2$", r"$0$", r"$A\omega^2$"]
@@ -284,7 +286,7 @@ class Ui_MainWindow(object):
         num_frames = 45
         grilley = [0]
 
-        grillex = np.linspace(0, 2*np.pi, 100)
+        grillex = np.linspace(0, 2*np.pi, 200)
 
         # Creation of the particle
         balls = []
@@ -333,9 +335,9 @@ class Ui_MainWindow(object):
             couleur = "g"
 
         if self.radioButton2.isChecked() == False:
-            deplacement_pos = amplitude*np.sin(omega*grillex + constante)
+            deplacement_pos = amplitude*np.exp(-amortissement*grillex)*np.sin(omega_prime*grillex + constante)
         else:
-            deplacement_pos = amplitude*np.cos(omega*grillex + constante)
+            deplacement_pos = amplitude*np.exp(-amortissement*grillex)*np.cos(omega_prime*grillex + constante)
 
         graph2, = self.ax2.plot(grillex, deplacement_pos, color=couleur)
 
@@ -353,7 +355,12 @@ class Ui_MainWindow(object):
 
         period = 2*np.pi/omega
         num_frames = int(num_frames*period)
+        omega_prime = np.sqrt(omega**2 - amortissement**2)
 
+
+        if amortissement != 0:
+            period = 10*period
+            num_frames = 10*num_frames
         tempss = np.linspace(0, period, num_frames)
         self.frames_particles = []
 
@@ -363,9 +370,9 @@ class Ui_MainWindow(object):
             self.frames_particles = []
             temps = tempss[i]
             if self.radioButton.isChecked() == True:
-                x = np.sin(omega*temps + constante)
+                x = np.exp(-amortissement*temps)*np.sin(omega_prime*temps + constante)
             else:
-                x = np.cos(omega*temps + constante)
+                x = np.exp(-amortissement*temps)*np.cos(omega_prime*temps + constante)
             for ball in balls:
                 position = ball.update_position(x)
                 for y in grilley:

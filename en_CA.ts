@@ -32,6 +32,10 @@
         <translation>Damping</translation>
     </message>
     <message>
+        <source>sous-amorti</source>
+        <translation>underdamped</translation>
+    </message>
+    <message>
         <source>Position</source>
         <translation>Position</translation>
     </message>
