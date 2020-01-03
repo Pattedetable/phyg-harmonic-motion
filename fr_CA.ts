@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="en" sourcelanguage="fr">
+<TS version="2.1" language="fr" sourcelanguage="fr">
 <context>
     <name>MainWindow</name>
     <message>
@@ -65,22 +65,22 @@
     </message>
     <message>
         <source>Aide</source>
-        <translation>Help</translation>
+        <translation>Aide</translation>
     </message>
     <message>
         <source>À propos</source>
-        <translation>About</translation>
+        <translation>À propos</translation>
     </message>
 </context>
 <context>
     <name>Dialog</name>
     <message>
         <source>À propos</source>
-        <translation>About</translation>
+        <translation>À propos</translation>
     </message>
     <message>
         <source>Fermer</source>
-        <translation>Close</translation>
+        <translation>Fermer</translation>
     </message>
 </context>
 </TS>
