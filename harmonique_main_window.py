@@ -159,7 +159,8 @@ class Ui_MainWindow(object):
 #        self.horizontalSlider4.setDisabled(True)
 #        self.label_4.setDisabled(True)
 
-
+        # To prevent the canvas from being destroyed when using the welcome screen
+        self.canvas.destroyed.connect(lambda: self.message())
 
         # Operating system detection
         self.systeme_exploitation = platform.system()
@@ -221,6 +222,9 @@ class Ui_MainWindow(object):
 
         self.menu_aide.setTitle(self._translate("MainWindow", "Aide"))
         self.action_propos.setText(self._translate("MainWindow", "À propos"))
+
+    def message(self):
+        print("Destruction")
 
     def disableAll(self, boolean):
         self.horizontalSlider.setDisabled(boolean)
