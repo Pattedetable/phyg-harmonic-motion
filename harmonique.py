@@ -17,8 +17,8 @@
 
 """ Initialize windows and make the main window appear """
 import sys
-from PyQt5 import QtCore
-from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog
+from PyQt6 import QtCore
+from PyQt6.QtWidgets import QApplication, QMainWindow, QDialog
 import harmonique_main_window
 import dialog_harmonique
 import platform
@@ -52,4 +52,4 @@ ui_Harmonique.setupUi(window_Harmonique, dialog, None)
 
 # Make main window appear
 window_Harmonique.show()
-sys.exit(app.exec_())
+sys.exit(app.exec())

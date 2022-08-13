@@ -16,8 +16,8 @@
 #
 
 
-from PyQt5 import QtCore, QtGui, QtWidgets
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from PyQt6 import QtCore, QtGui, QtWidgets
+from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg as FigureCanvas
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -52,7 +52,7 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.pushButton_3, 13, 0, 1, 3)
 
 
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
         self.gridLayout.addItem(spacerItem, 12, 0, 1, 1)
 
         self.radioButton = QtWidgets.QRadioButton(self.centralwidget) # Sine
@@ -68,11 +68,10 @@ class Ui_MainWindow(object):
         self.label.setObjectName("label")
         self.gridLayout.addWidget(self.label, 4, 0, 1, 1)
 
-        self.horizontalSlider = QtWidgets.QSlider(self.centralwidget) # Amplitude
+        self.horizontalSlider = QtWidgets.QSlider(QtCore.Qt.Orientation.Horizontal, self.centralwidget) # Amplitude
         self.horizontalSlider.setMinimum(1)
         self.horizontalSlider.setMaximum(5)
         self.horizontalSlider.setPageStep(2)
-        self.horizontalSlider.setOrientation(QtCore.Qt.Horizontal)
         self.horizontalSlider.setObjectName("horizontalSlider")
         self.gridLayout.addWidget(self.horizontalSlider, 5, 0, 1, 3)
 
@@ -80,11 +79,10 @@ class Ui_MainWindow(object):
         self.label_2.setObjectName("label_2")
         self.gridLayout.addWidget(self.label_2, 6, 0, 1, 1)
 
-        self.horizontalSlider2 = QtWidgets.QSlider(self.centralwidget) # Frequency
+        self.horizontalSlider2 = QtWidgets.QSlider(QtCore.Qt.Orientation.Horizontal, self.centralwidget) # Frequency
         self.horizontalSlider2.setMinimum(1)
         self.horizontalSlider2.setMaximum(8)
         self.horizontalSlider2.setPageStep(4)
-        self.horizontalSlider2.setOrientation(QtCore.Qt.Horizontal)
         self.horizontalSlider2.setObjectName("horizontalSlider2")
         self.gridLayout.addWidget(self.horizontalSlider2, 7, 0, 1, 3)
 
@@ -92,11 +90,10 @@ class Ui_MainWindow(object):
         self.label_3.setObjectName("label_3")
         self.gridLayout.addWidget(self.label_3, 8, 0, 1, 1)
 
-        self.horizontalSlider3 = QtWidgets.QSlider(self.centralwidget) # Phase constant
+        self.horizontalSlider3 = QtWidgets.QSlider(QtCore.Qt.Orientation.Horizontal, self.centralwidget) # Phase constant
         self.horizontalSlider3.setMinimum(-8)
         self.horizontalSlider3.setMaximum(8)
         self.horizontalSlider3.setPageStep(4)
-        self.horizontalSlider3.setOrientation(QtCore.Qt.Horizontal)
         self.horizontalSlider3.setObjectName("horizontalSlider3")
         self.gridLayout.addWidget(self.horizontalSlider3, 9, 0, 1, 3)
 
@@ -104,11 +101,10 @@ class Ui_MainWindow(object):
         self.label_4.setObjectName("label_4")
         self.gridLayout.addWidget(self.label_4, 10, 0, 1, 1)
 
-        self.horizontalSlider4 = QtWidgets.QSlider(self.centralwidget) # Damping
+        self.horizontalSlider4 = QtWidgets.QSlider(QtCore.Qt.Orientation.Horizontal, self.centralwidget) # Damping
         self.horizontalSlider4.setMinimum(0)
         self.horizontalSlider4.setMaximum(10)
         self.horizontalSlider4.setPageStep(2)
-        self.horizontalSlider4.setOrientation(QtCore.Qt.Horizontal)
         self.horizontalSlider4.setObjectName("horizontalSlider4")
         self.gridLayout.addWidget(self.horizontalSlider4, 11, 0, 1, 3)
 
@@ -125,7 +121,7 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.comboBox, 3, 0, 1, 3)
 
         self.canvas = FigureCanvas(self.figure) # Grap
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.canvas.sizePolicy().hasHeightForWidth())
@@ -144,7 +140,7 @@ class Ui_MainWindow(object):
         self.menu_aide = QtWidgets.QMenu(self.menubar)
         self.menu_aide.setObjectName("menu_aide")
         MainWindow.setMenuBar(self.menubar)
-        self.action_propos = QtWidgets.QAction(MainWindow)
+        self.action_propos = QtGui.QAction(MainWindow)
         self.action_propos.setObjectName("action_propos")
         self.menu_aide.addAction(self.action_propos)
         self.menubar.addAction(self.menu_aide.menuAction())
@@ -192,8 +188,8 @@ class Ui_MainWindow(object):
         self.radioButton2.toggled.connect(lambda: self.animationTempsReel())
         self.pushButton_3.clicked.connect(lambda: self.stopAnim())
         self.pushButton_3.clicked.connect(lambda: self.animationTempsReel())
-        self.comboBox.currentIndexChanged['QString'].connect(lambda: self.stopAnim())
-        self.comboBox.currentIndexChanged['QString'].connect(lambda: self.animationTempsReel())
+        self.comboBox.currentIndexChanged['int'].connect(lambda: self.stopAnim())
+        self.comboBox.currentIndexChanged['int'].connect(lambda: self.animationTempsReel())
 
 
 #        self.pushButton.clicked.connect(lambda: self.stopAnim())
