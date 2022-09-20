@@ -220,7 +220,8 @@ class Ui_MainWindow(object):
         self.action_propos.setText(self._translate("MainWindow", "À propos"))
 
     def message(self):
-        print("Destruction")
+#        print("Destruction")
+        pass
 
     def disableAll(self, boolean):
         self.horizontalSlider.setDisabled(boolean)
@@ -286,22 +287,26 @@ class Ui_MainWindow(object):
         v_label = [r"$-A\omega$", r"$0$", r"$A\omega$"]
         a_label = [r"$-A\omega^2$", r"$0$", r"$A\omega^2$"]
 
-        nb_particules = 1
+#        nb_particules = 1
         num_frames = 45
-        grilley = [0]
+#        grilley = [0]
+        y = 0
 
         grillex = np.linspace(0, 2*np.pi, 200)
 
         # Creation of the particle
-        balls = []
-        for i in range(0, nb_particules):
-            x_eq = 0
-            balls.append(particle.Particule(x_eq, amplitude))
+        x_eq = 0
+        ball = particle.Particule(x_eq, amplitude)
+        cercle = plt.Circle((ball.x_eq, y), 0.3, color="k")
 
         self.ax1 = self.figure.add_subplot(121)
         self.ax2 = self.figure.add_subplot(122)
 
-        self.ax1.axis([-1, 1, -5, 5])
+        self.ax1.add_artist(cercle)
+#        self.ax1.set_aspect("equal")
+#        self.ax2.set_aspect("equal")
+
+        self.ax1.axis([-5, 5, -5, 5])
         self.ax1.set_xticks([])
         self.ax1.set_yticks([-amplitude, 0, amplitude])
         self.ax1.set_yticklabels(y_label)
@@ -359,13 +364,13 @@ class Ui_MainWindow(object):
         amplitude = self.horizontalSlider.value()
         constante = self.horizontalSlider3.value()*np.pi/4
 
-        return num_frames, omega, amplitude, constante, amortissement, balls, grilley
+        return num_frames, omega, amplitude, constante, amortissement, ball, cercle, y
 
 
     def animationTempsReel(self):
         """ Display the animation in real time """
 
-        [num_frames, omega, amplitude, constante, amortissement, balls, grilley] = self.initAnimation()
+        [num_frames, omega, amplitude, constante, amortissement, ball, cercle, y] = self.initAnimation()
 
         period = 2*np.pi/omega
         num_frames = int(num_frames*period)
@@ -373,24 +378,18 @@ class Ui_MainWindow(object):
 
 
         if amortissement != 0:
-            period = 10*period
-            num_frames = 10*num_frames
+            period = 20*period
+            num_frames = 20*num_frames
         tempss = np.linspace(0, period, num_frames)
-        self.frames_particles = []
 
         def update(i):
-            for frame in self.frames_particles:
-                frame.remove()
-            self.frames_particles = []
             temps = tempss[i]
             if self.radioButton.isChecked() == True:
                 x = np.exp(-omega*amortissement*temps)*np.sin(omega_prime*temps + constante)
             else:
                 x = np.exp(-omega*amortissement*temps)*np.cos(omega_prime*temps + constante)
-            for ball in balls:
-                position = ball.update_position(x)
-                for y in grilley:
-                    self.frames_particles.append(self.ax1.scatter(y, position, s=150, color='k'))
+            position = ball.update_position(x)
+            cercle.center = y, position
 
         self.oscillation = anim.FuncAnimation(self.figure, update, frames=num_frames, repeat=True, interval=period/num_frames)
         self.canvas.draw()
