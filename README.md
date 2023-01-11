@@ -1,6 +1,6 @@
 # Mouvement harmonique
 
-![screenshot](https://raw.githubusercontent.com/Pattedetable/phyg-harmonic-motion/qt6/images/SHM_screenshot.png)
+![screenshot](https://raw.githubusercontent.com/Pattedetable/phyg-harmonic-motion/master/images/SHM_screenshot.png)
 
 _The English version follows_
 
